@@ -12,7 +12,7 @@ local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<C-s>', '<cmd> w <CR>', opts)
 
 -- save file without auto-formatting
-vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
+-- vim.keymap.set('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 
 -- quit file
 vim.keymap.set('n', '<C-q>', '<cmd> q <CR>', opts)
@@ -76,3 +76,27 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- move a blocks of text up/down with K/J in visual mode
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { silent = true })
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { silent = true })
+
+-- Paste in visual mode without yanking replaced text
+vim.keymap.set('x', 'p', [["_dP]])
+
+-- yank to clipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
+-- yank line to clipboard
+vim.keymap.set('n', '<leader>Y', [["+Y]])
+-- search for files in full vault
+
+-- search for files in full vault
+vim.keymap.set('n', '<leader>of', ':Telescope find_files search_dirs={"$HOME/notes/"}<cr>')
+vim.keymap.set('n', '<leader>ow', ':Telescope live_grep search_dirs={"$HOME/notes/"}<cr>')
+
+--
+-- for review workflow
+-- move file in current buffer to zettelkasten folder
+vim.keymap.set('n', '<leader>ok', ":!mv '%:p' /Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/zettelkasten<cr>:bd<cr>")
+-- delete file in current buffer
+vim.keymap.set('n', '<leader>odd', ":!rm '%:p'<cr>:bd<cr>")

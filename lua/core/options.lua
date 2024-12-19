@@ -26,7 +26,7 @@ vim.o.smartindent = true -- Make indenting smarter again (default: false)
 vim.o.showtabline = 2 -- Always show tabs (default: 1)
 vim.o.backspace = 'indent,eol,start' -- Allow backspace on (default: 'indent,eol,start')
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
-vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
+vim.o.conceallevel = 2 -- So that `` is visible in markdown files (default: 1)
 vim.wo.signcolumn = 'yes' -- Keep signcolumn on by default (default: 'auto')
 vim.o.fileencoding = 'utf-8' -- The encoding written to a file (default: 'utf-8')
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
@@ -41,3 +41,29 @@ vim.opt.shortmess:append 'c' -- Don't give |ins-completion-menu| messages (defau
 vim.opt.iskeyword:append '-' -- Hyphenated words recognized by searches (default: does not include '-')
 vim.opt.formatoptions:remove { 'c', 'r', 'o' } -- Don't insert the current comment leader automatically for auto-wrapping comments using 'textwidth', hitting <Enter> in insert mode, or hitting 'o' or 'O' in normal mode. (default: 'croql')
 vim.opt.runtimepath:remove '/usr/share/vim/vimfiles' -- Separate Vim plugins from Neovim in case Vim still in use (default: includes this path if Vim is installed)
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.py',
+  callback = function()
+    vim.opt.textwidth = 79
+    vim.opt.colorcolumn = '79'
+  end,
+}) -- python formatting
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = { '*.html', '*.css', '*.lua' },
+  callback = function()
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 2
+  end,
+}) -- formatting for html css and lua
+
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--   pattern = '*',
+--   callback = function()
+--     if vim.fn.line '\'"' > 0 and vim.fn.line '\'"' <= vim.fn.line '$' then
+--       vim.cmd 'normal! g`"'
+--     end
+--   end,
+-- }) -- return to last edit position when opening files

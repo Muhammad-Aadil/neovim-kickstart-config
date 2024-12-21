@@ -32,6 +32,7 @@ require('lazy').setup {
   require 'plugins.obsidian',
   require 'plugins.twillight',
   -- require 'plugins.gruvbox', -- for the gruvbox theme
+  -- require 'plugins.catppuccin', -- for catppuccing theme
 }
 
 -- The line beneath this is called `modeline`. See `:help modeline`

@@ -91,12 +91,21 @@ vim.keymap.set('n', '<leader>Y', [["+Y]])
 -- search for files in full vault
 
 -- search for files in full vault
-vim.keymap.set('n', '<leader>of', ':Telescope find_files search_dirs={"$HOME/notes/"}<cr>')
-vim.keymap.set('n', '<leader>ow', ':Telescope live_grep search_dirs={"$HOME/notes/"}<cr>')
+vim.keymap.set('n', '<leader>of', ':Telescope find_files search_dirs={"$HOME/brain/"}<cr>')
+vim.keymap.set('n', '<leader>ow', ':Telescope live_grep search_dirs={"$HOME/brain/"}<cr>')
+
+-- obsidian keymaps
+-- for this keymap to working you need to create a dir(templates) in vault(~/brain) and have a file(note.md)
+-- and also add this thing in obsidian configuration templates = {}
+vim.keymap.set('n', '<leader>on', ':ObsidianTemplate note<cr> :lua vim.cmd([[1,/^\\S/s/^\\n\\{1,}//]])<cr>')
+-- delete file in current buffer
+vim.keymap.set('n', '<leader>odd', ":!rm '%:p'<cr>:bd<cr>")
 
 --
 -- for review workflow
 -- move file in current buffer to zettelkasten folder
-vim.keymap.set('n', '<leader>ok', ":!mv '%:p' /Users/alex/library/Mobile\\ Documents/iCloud~md~obsidian/Documents/ZazenCodes/zettelkasten<cr>:bd<cr>")
--- delete file in current buffer
-vim.keymap.set('n', '<leader>odd', ":!rm '%:p'<cr>:bd<cr>")
+vim.keymap.set('n', '<leader>ok', ":!mv '%:p' $HOME/brain/00-zettelkasten/<cr>:bd<cr>")
+
+-- must have cursor on title
+vim.keymap.set('n', '<leader>ot', ':s/\\(# \\)[^_]*_/\\1/ | s/-/ /g<cr>')
+--

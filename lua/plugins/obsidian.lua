@@ -17,11 +17,23 @@ return {
 
     -- see below for full list of optional dependencies 👇
   },
+  completions = {
+    nvim_cmp = true,
+    min_chars = 2,
+  },
   opts = {
+    notes_subdir = '0-inbox',
+    new_notes_location = 'notes_subdir',
+    disable_frontmatter = true, -- this will disable the it's own formatter
+    templates = {
+      subdir = 'templates',
+      date_format = '%Y-%m-%d',
+      time_format = '%H:%M:%S',
+    },
     workspaces = {
       {
         name = 'personal',
-        path = '~/notes',
+        path = '~/brain',
       },
     },
 
